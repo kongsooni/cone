@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* 이서윤체 폰트 적용을 위한 코드 */
+        
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            background-color: white;
+        }
+
+        /* 너비는 390픽셀이구, 배경색이 좀 필요하고 부모(body) 높이 전체를 쓸거야 */
+        .container{
+            width: 390px;
+            background-color: #93B659;
+            height: 100%;
+        }
+
+        /* 사진 박스 모음 */
+        /* 위로 여유가 30픽셀 */
+        .photos{
+            margin-top: 30px;
+        }
+
+        /* 각 사진 박스 */
+        /* 배경은 흰색, 좌우 마진 20픽셀 */
+        /* 상하 마진 15픽셀, 높이는 각 사진 별 200px */
+        .photo-frame{
+            background-color: white;
+            margin: 15px 20px;
+            height: 200px;
+
+            background-size: cover; /* 이미지 사이즈 조정 */
+
+            position: relative;
+
+            cursor: pointer;
+        }
+
+        .footer{
+            display: flex;
+            flex-direction: column; /* footer의 글씨가 세로정렬 */
+            align-items: center; /* 세로정렬된걸 가운데 정렬로 */
+        }
+
+        .f-title{
+            color: white;
+            font-size: 25px;
+            font-weight: 900;
+        }
+
+        .f-date{
+            color: white;
+            font-size: 15px;
+            font-weight: 500;
+        }    
+
+        /* 이미지 넣기 */
+        #image1{
+            background-image: url(./img1.jpeg);
+        }
+
+        #image2{
+            background-image: url(./img2.jpeg);
+        }
+
+        #image3{
+            background-image: url(./img3.jpeg);
+        }
+
+        #image4{
+            background-image: url(./img4.jpeg);
+        }
+
+        .photo_description{
+            color: white;
+            background-color: rgba(0, 0, 0, 0.5);
+
+            width: 310px;
+            padding: 0 20px;
+            margin-bottom: 0px;
+            border-radius: 0px;
+
+            position: absolute;
+            bottom: 0;
+
+            transform: translate(-50%);
+            left: 50%;
+
+            text-align: center;
+
+            opacity: 0;
+        }
+
+        .video {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* 마우스 효과 넣기 */
+        /* opacity : 투명도를 의미해요! opacity는 1에 가까워 질 수록 불투명하다. 즉 다 보인다. */
+        .showText {
+            opacity: 1;
+            transition: opacity 0.5s linear;
+        }
+
+        /* opacity : 투명도를 의미해요! opacity는 0에 가까워 질 수록 투명하다. 즉 안보인다. */
+        /* transition : 나타날 때 0.5초동안 천천히 나타나는 효과를 주라는 의미에요 */
+        .hideText {
+            opacity: 0;
+        }
+    </style>
+
+    <script>
+        // 텍스트가 보여지는 기능
+        // 1. 몇 번째 사진에 마우스가 올라갔는지 확인(if문)
+        // 2. 해당 사진을 찾아 hideText class를 지워주고, showText는 삽입해줌
+        function showText(number) {
+        if (number === 1) {
+            document.querySelector("#desc1").classList.remove("hideText");
+            document.querySelector("#desc1").classList.add("showText");
+        } else if (number === 2) {
+            document.querySelector("#desc2").classList.remove("hideText");
+            document.querySelector("#desc2").classList.add("showText");
+        } else {
+            document.querySelector("#desc3").classList.remove("hideText");
+            document.querySelector("#desc3").classList.add("showText");
+        }
+        }
+
+        // 텍스트가 감춰지는 기능
+        // 1. 몇 번째 사진에서 마우스가 벗어났는지 확인(if문)
+        // 2. 해당 사진을 찾아 shotText class를 지워주고, hideText는 삽입해줌
+        function hideText(number) {
+        if (number === 1) {
+            document.querySelector("#desc1").classList.remove("showText");
+            document.querySelector("#desc1").classList.add("hideText");
+        } else if (number === 2) {
+            document.querySelector("#desc2").classList.remove("showText");
+            document.querySelector("#desc2").classList.add("hideText");
+        } else {
+            document.querySelector("#desc3").classList.remove("showText");
+            document.querySelector("#desc3").classList.add("hideText");
+        }
+        }
+
+        // 클릭 기능
+        // 1. 선택된 사진의 숫자를 가진 텍스트를 alert 형태로 출력해줌
+        function alertText(number) {
+            alert(`${number}번째 추억... ㄱ... 나니....? :-)`);
+        }
+    </script>
+</head>
+
+
+<body>
+    <div class="container">
+        <div class="photos"></div>
+            <div 
+                id="image1" class="photo-frame"
+                onmouseover="showText(1)"
+                onmouseout="hideText(1)"
+                onclick="alertText(1)"
+            >
+                <span id="desc1" class="photo_description">
+                    2022.September.27
+                </span>
+            </div>
+            <div 
+                id="image2" class="photo-frame"
+                onmouseover="showText(2)"
+                onmouseout="hideText(2)"
+                onclick="alertText(2)"
+            >
+                <span id="desc2" class="photo_description">
+                    2022.October.01
+                </span>
+            </div>
+            <div 
+                id="image3" class="photo-frame"
+                onmouseover="showText(3)"
+                onmouseout="hideText(3)"
+                onclick="alertText(3)"    
+            >
+                <span id="desc3" class="photo_description">
+                    2022.October.13
+                </span>
+            </div>
+            <div id="image4" class="photo-frame"> 
+            	<iframe
+                    class="video"
+                    src="https://www.youtube.com/embed/1rvOWVTAOzY"
+                    frameborder="0"
+                ></iframe>
+            </div>
+        <div class="footer">
+            <p class="f-title">✨ 조연수 (25세, 만 23세) ✨</p>
+            <p class="f-date">[특징] 신이날땐 몸이 ㄱ으로 꺾이며, 과자를 공격함</p>
+        </div>
+    </div>
+</body>
+
+
+</html>
